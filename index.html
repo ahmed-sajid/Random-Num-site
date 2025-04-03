@@ -2,81 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Simple Calculator</title>
+  <title>NeoCity Pop Plaza</title>
   <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: white;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 100px;
-      background: #f0f0f0;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 3s ease-in-out;
     }
-    .calculator {
-      display: inline-block;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+    #overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
     }
-    input[type="number"] {
-      width: 120px;
-      padding: 10px;
-      margin: 10px;
-      font-size: 16px;
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 30px;
     }
-    button {
-      padding: 10px 15px;
-      font-size: 16px;
-      margin: 5px;
-      cursor: pointer;
-    }
-    #result {
+
+    iframe {
+      width: 300px;
+      height: 170px;
+      border: none;
       margin-top: 20px;
-      font-size: 24px;
-      font-weight: bold;
+    }
+
+    button {
+      background: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="calculator">
-    <input type="number" id="num1" placeholder="First Number">
-    <input type="number" id="num2" placeholder="Second Number">
-    <br>
-    <button onclick="calculate('+')">+</button>
-    <button onclick="calculate('-')">-</button>
-    <button onclick="calculate('*')">*</button>
-    <button onclick="calculate('/')">/</button>
-    <div id="result">Result: </div>
-  </div>
 
-  <script>
-    function calculate(operation) {
-      const num1 = parseFloat(document.getElementById("num1").value);
-      const num2 = parseFloat(document.getElementById("num2").value);
-      let result;
+<div id="overlay">
+  <h1>🌆 NeoCity Pop Plaza</h1>
+  <button onclick="playCityPop()">Start Streaming</button>
+  <iframe id="ytplayer" style="display: none;" allow="autoplay" allowfullscreen></iframe>
+</div>
 
-      if (isNaN(num1) || isNaN(num2)) {
-        result = "Please enter both numbers.";
-      } else {
-        switch (operation) {
-          case '+':
-            result = num1 + num2;
-            break;
-          case '-':
-            result = num1 - num2;
-            break;
-          case '*':
-            result = num1 * num2;
-            break;
-          case '/':
-            result = num2 !== 0 ? num1 / num2 : "Cannot divide by zero!";
-            break;
-          default:
-            result = "Unknown operation";
-        }
-      }
+<script>
+  const backgrounds = [
+    'https://i.imgur.com/lU3p5DG.jpeg',
+    'https://i.imgur.com/Xm7i3Tc.jpeg',
+    'https://i.imgur.com/rb3iPh6.jpeg',
+    'https://i.imgur.com/JXwuz3o.jpeg',
+    'https://i.imgur.com/fPAB3UO.jpeg'
+  ];
 
-      document.getElementById("result").textContent = "Result: " + result;
-    }
-  </script>
+  let bgIndex = 0;
+
+  function cycleBackgrounds() {
+    document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
+    bgIndex = (bgIndex + 1) % backgrounds.length;
+  }
+
+  cycleBackgrounds();
+  setInterval(cycleBackgrounds, 7000);
+
+  function playCityPop() {
+    const player = document.getElementById("ytplayer");
+
+    // Replace this playlist with lesser-known city pop videos
+    const videoIDs = [
+      "t-QSmNReDyI", // obscure city pop
+      "fGvpyJze4cQ", // indie funk/fusion
+      "1wnE4vF9CQ4", // chill track
+      "i9aKqMcEjeE", // lo-fi city groove
+      "bCUN63Fkdzg"  // rare retro
+    ];
+
+    const randomVideo = videoIDs[Math.floor(Math.random() * videoIDs.length)];
+    player.src = `https://www.youtube.com/embed/${randomVideo}?autoplay=1&rel=0&controls=1`;
+    player.style.display = "block";
+  }
+</script>
+
 </body>
 </html>
