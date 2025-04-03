@@ -2,81 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Simple Calculator</title>
+  <title>Random Number Generator</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       text-align: center;
       margin-top: 100px;
-      background: #f0f0f0;
+      font-family: 'Arial', sans-serif;
     }
-    .calculator {
-      display: inline-block;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    input[type="number"] {
-      width: 120px;
-      padding: 10px;
-      margin: 10px;
-      font-size: 16px;
-    }
-    button {
-      padding: 10px 15px;
-      font-size: 16px;
-      margin: 5px;
-      cursor: pointer;
-    }
-    #result {
-      margin-top: 20px;
-      font-size: 24px;
+    #number {
+      font-size: 100px;
       font-weight: bold;
+      font-family: 'Georgia', serif;
+      color: darkblue;
+    }
+    #phrase {
+      font-size: 60px;
+      font-family: 'Wingdings', 'Webdings';
+      margin-top: 40px;
+      color: darkgreen;
     }
   </style>
 </head>
 <body>
-  <div class="calculator">
-    <input type="number" id="num1" placeholder="First Number">
-    <input type="number" id="num2" placeholder="Second Number">
-    <br>
-    <button onclick="calculate('+')">+</button>
-    <button onclick="calculate('-')">-</button>
-    <button onclick="calculate('*')">*</button>
-    <button onclick="calculate('/')">/</button>
-    <div id="result">Result: </div>
-  </div>
+  <div id="number">0</div>
+  <div id="phrase">🙂</div>
 
   <script>
-    function calculate(operation) {
-      const num1 = parseFloat(document.getElementById("num1").value);
-      const num2 = parseFloat(document.getElementById("num2").value);
-      let result;
+    // Generate random number
+    const randomNumber = Math.floor(Math.random() * 1000);
+    document.getElementById('number').textContent = randomNumber;
 
-      if (isNaN(num1) || isNaN(num2)) {
-        result = "Please enter both numbers.";
-      } else {
-        switch (operation) {
-          case '+':
-            result = num1 + num2;
-            break;
-          case '-':
-            result = num1 - num2;
-            break;
-          case '*':
-            result = num1 * num2;
-            break;
-          case '/':
-            result = num2 !== 0 ? num1 / num2 : "Cannot divide by zero!";
-            break;
-          default:
-            result = "Unknown operation";
-        }
-      }
-
-      document.getElementById("result").textContent = "Result: " + result;
-    }
+    // Random Wingdings-like phrases (just for fun)
+    const phrases = ['abc', 'xyz', '123', 'hello', 'wow'];
+    const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+    document.getElementById('phrase').textContent = randomPhrase;
   </script>
 </body>
 </html>
