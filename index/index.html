@@ -2,37 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Random Number Generator</title>
+  <title>Solarpunk Randomizer</title>
   <style>
-    body {
-      text-align: center;
-      margin-top: 100px;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
       font-family: 'Arial', sans-serif;
+      color: white;
     }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 2s ease-in-out;
+    }
+
+    #overlay {
+      background: rgba(0, 0, 0, 0.5); /* dark overlay for readability */
+      padding: 40px;
+      border-radius: 20px;
+    }
+
     #number {
       font-size: 100px;
       font-weight: bold;
       font-family: 'Georgia', serif;
-      color: darkblue;
     }
+
     #phrase {
       font-size: 60px;
       font-family: 'Wingdings', 'Webdings';
       margin-top: 40px;
-      color: darkgreen;
     }
   </style>
 </head>
 <body>
-  <div id="number">0</div>
-  <div id="phrase">🙂</div>
+  <div id="overlay">
+    <div id="number">0</div>
+    <div id="phrase">🙂</div>
+  </div>
 
   <script>
-    // Generate random number
+    // Replace these URLs with whatever aesthetic backgrounds you want
+    const backgrounds = [
+      'https://i.imgur.com/U5gA9KF.jpeg',  // example nightwave-style
+      'https://i.imgur.com/kJgkWrq.jpeg',
+      'https://i.imgur.com/1XqJg3B.jpeg',
+      'https://i.imgur.com/O5qfyZL.jpeg',
+      'https://i.imgur.com/RqTbPgi.jpeg'
+    ];
+
+    let index = 0;
+
+    function updateBackground() {
+      document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
+      index = (index + 1) % backgrounds.length;
+    }
+
+    // Cycle every 5 seconds
+    updateBackground();
+    setInterval(updateBackground, 5000);
+
+    // Random number
     const randomNumber = Math.floor(Math.random() * 1000);
     document.getElementById('number').textContent = randomNumber;
 
-    // Random Wingdings-like phrases (just for fun)
+    // Random Wingdings-style phrases
     const phrases = ['abc', 'xyz', '123', 'hello', 'wow'];
     const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
     document.getElementById('phrase').textContent = randomPhrase;
