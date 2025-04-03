@@ -2,81 +2,94 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Nightwave Randomizer</title>
+  <title>Simple Calculator</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Arial', sans-serif;
-      color: white;
-    }
-
     body {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
+    }
+
+    #calculator {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
       text-align: center;
-      background-color: #000; /* fallback */
-      background-size: cover;
-      background-position: center;
-      transition: background-image 2s ease-in-out;
+      width: 300px;
     }
 
-    #overlay {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 40px;
-      border-radius: 20px;
+    input[type="number"] {
+      width: 80px;
+      padding: 8px;
+      margin: 10px;
+      font-size: 16px;
     }
 
-    #number {
-      font-size: 100px;
+    select, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 24px;
       font-weight: bold;
-      font-family: 'Georgia', serif;
-    }
-
-    #phrase {
-      font-size: 60px;
-      font-family: 'Segoe UI Symbol', 'Webdings', 'Wingdings', cursive;
-      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <div id="overlay">
-    <div id="number">0</div>
-    <div id="phrase">🙂</div>
+  <div id="calculator">
+    <h2>Simple Calculator</h2>
+    <input type="number" id="num1" placeholder="First number">
+    <input type="number" id="num2" placeholder="Second number"><br>
+
+    <select id="operation">
+      <option value="add">+</option>
+      <option value="subtract">−</option>
+      <option value="multiply">×</option>
+      <option value="divide">÷</option>
+    </select>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div id="result"></div>
   </div>
 
   <script>
-    const backgrounds = [
-      'https://i.imgur.com/Xm7i3Tc.jpeg',
-      'https://i.imgur.com/JXwuz3o.jpeg',
-      'https://i.imgur.com/lU3p5DG.jpeg',
-      'https://i.imgur.com/fPAB3UO.jpeg',
-      'https://i.imgur.com/rb3iPh6.jpeg'
-    ];
+    function calculate() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      const operation = document.getElementById('operation').value;
+      let result;
 
-    let index = 0;
+      if (isNaN(num1) || isNaN(num2)) {
+        result = "Please enter valid numbers.";
+      } else {
+        switch (operation) {
+          case "add":
+            result = num1 + num2;
+            break;
+          case "subtract":
+            result = num1 - num2;
+            break;
+          case "multiply":
+            result = num1 * num2;
+            break;
+          case "divide":
+            result = num2 !== 0 ? num1 / num2 : "Can't divide by zero";
+            break;
+          default:
+            result = "Invalid operation.";
+        }
+      }
 
-    function updateBackground() {
-      document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
-      index = (index + 1) % backgrounds.length;
+      document.getElementById('result').textContent = "Result: " + result;
     }
-
-    // Initial load + interval
-    updateBackground();
-    setInterval(updateBackground, 5000);
-
-    // Random number
-    const randomNumber = Math.floor(Math.random() * 1000);
-    document.getElementById('number').textContent = randomNumber;
-
-    // Random Wingdings-style phrases
-    const phrases = ['♠♣♥♦', '✓✗✓✗', '⚡☀⚙☁', '♻☮☯', '♫♪☠★'];
-    const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-    document.getElementById('phrase').textContent = randomPhrase;
   </script>
 </body>
 </html>
