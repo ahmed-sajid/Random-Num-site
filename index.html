@@ -1,16 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>NeoCity Pop</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeoCity Pop Plaza</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+      color: white;
+    }
+
+    body {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background-image 2s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #overlay {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 50px 40px;
+      border-radius: 32px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 80px rgba(0, 255, 170, 0.2);
+      text-align: center;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 3.2em;
+      margin: 0 0 20px;
+      background: linear-gradient(to right, #00ffc3, #b388ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+      color: #d0d0d0;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 14px 30px;
+      background-color: #1DB954;
+      border: none;
+      color: white;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(29, 185, 84, 0.4);
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #1ed760;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
-<body style="text-align: center; font-family: sans-serif; margin-top: 100px;">
-  <h1>🌃 NeoCity Pop Plaza</h1>
-  <button id="login-btn" style="padding: 10px 20px; font-size: 18px;">Connect to Spotify</button>
+<body>
+  <div id="overlay">
+    <h1>NeoCity Pop Plaza</h1>
+    <p>Connect to Spotify and enter a world of low-key city pop & solarpunk vibes</p>
+    <button id="login-btn">Connect to Spotify</button>
+  </div>
 
   <script>
-    const clientId = "acb17acc012843429494024136dfb515"; // Replace this!
-    const redirectUri = "https://ahmed-sajid.github.io/Random-Num-site/callback.html";
+    const images = [
+      'assets/11f9ac7a-1c2d-404b-9048-4d651efde224.png',
+      'assets/Chobani_Ad_1.png',
+      'assets/a5ae9de0-e0ea-4000-b971-97107712b6ac.png',
+      'assets/s30tftwmzin41.png',
+      'assets/solarpunk-steven-wong-artstation-v0-i1tywiijna6a1.png'
+    ];
+
+    let index = 0;
+
+    function changeBackground() {
+      document.body.style.backgroundImage = `url('${images[index]}')`;
+      index = (index + 1) % images.length;
+    }
+
+    changeBackground();
+    setInterval(changeBackground, 7000);
+
+    const clientId = "YOUR_SPOTIFY_CLIENT_ID"; // Replace this
+    const redirectUri = "https://yourusername.github.io/your-repo-name/callback.html"; // Replace this
+
     const scopes = [
       "streaming",
       "user-read-email",
