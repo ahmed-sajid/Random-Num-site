@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Solarpunk Randomizer</title>
+  <title>Nightwave Randomizer</title>
   <style>
     html, body {
       margin: 0;
@@ -18,13 +18,14 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+      background-color: #000; /* fallback */
       background-size: cover;
       background-position: center;
       transition: background-image 2s ease-in-out;
     }
 
     #overlay {
-      background: rgba(0, 0, 0, 0.5); /* dark overlay for readability */
+      background: rgba(0, 0, 0, 0.6);
       padding: 40px;
       border-radius: 20px;
     }
@@ -37,7 +38,7 @@
 
     #phrase {
       font-size: 60px;
-      font-family: 'Wingdings', 'Webdings';
+      font-family: 'Segoe UI Symbol', 'Webdings', 'Wingdings', cursive;
       margin-top: 40px;
     }
   </style>
@@ -49,13 +50,12 @@
   </div>
 
   <script>
-    // Replace these URLs with whatever aesthetic backgrounds you want
     const backgrounds = [
-      'https://i.imgur.com/U5gA9KF.jpeg',  // example nightwave-style
-      'https://i.imgur.com/kJgkWrq.jpeg',
-      'https://i.imgur.com/1XqJg3B.jpeg',
-      'https://i.imgur.com/O5qfyZL.jpeg',
-      'https://i.imgur.com/RqTbPgi.jpeg'
+      'https://i.imgur.com/Xm7i3Tc.jpeg',
+      'https://i.imgur.com/JXwuz3o.jpeg',
+      'https://i.imgur.com/lU3p5DG.jpeg',
+      'https://i.imgur.com/fPAB3UO.jpeg',
+      'https://i.imgur.com/rb3iPh6.jpeg'
     ];
 
     let index = 0;
@@ -65,7 +65,7 @@
       index = (index + 1) % backgrounds.length;
     }
 
-    // Cycle every 5 seconds
+    // Initial load + interval
     updateBackground();
     setInterval(updateBackground, 5000);
 
@@ -74,7 +74,7 @@
     document.getElementById('number').textContent = randomNumber;
 
     // Random Wingdings-style phrases
-    const phrases = ['abc', 'xyz', '123', 'hello', 'wow'];
+    const phrases = ['♠♣♥♦', '✓✗✓✗', '⚡☀⚙☁', '♻☮☯', '♫♪☠★'];
     const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
     document.getElementById('phrase').textContent = randomPhrase;
   </script>
