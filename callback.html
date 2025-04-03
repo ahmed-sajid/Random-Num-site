@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Callback</title>
+</head>
+<body>
+  <script>
+    const hash = window.location.hash.substring(1).split("&").reduce((acc, cur) => {
+      const [key, val] = cur.split("=");
+      acc[key] = decodeURIComponent(val);
+      return acc;
+    }, {});
+
+    const accessToken = hash.access_token;
+
+    if (accessToken) {
+      console.log("Access token:", accessToken);
+
+      // Play a hardcoded track (City Pop vibe)
+      fetch("https://api.spotify.com/v1/me/player/play", {
+        method: "PUT",
+        headers: {
+          "Authorization": "Bearer " + accessToken,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          uris: ["spotify:track:4xkOaSrkexMciUUogZKVTS"] // Tatsuro Yamashita - Sparkle
+        })
+      }).then(res => {
+        if (res.ok) {
+          document.body.innerHTML = "<h2>🎶 Playing City Pop... 🎶</h2>";
+        } else {
+          document.body.innerHTML = "<h2>Playback failed 😢</h2>";
+        }
+      });
+    } else {
+      document.body.innerHTML = "<h2>No access token found 😕</h2>";
+    }
+  </script>
+</body>
+</html>
