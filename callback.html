@@ -15,7 +15,9 @@
     }, {});
     const token = hash.access_token;
 
-    const trackUri = "spotify:track:4xkOaSrkexMciUUogZKVTS"; // Tatsuro Yamashita - Sparkle (example)
+    const trackId = "4xkOaSrkexMciUUogZKVTS"; // Tatsuro Yamashita - Sparkle
+window.location.href = `https://open.spotify.com/track/${trackId}`;
+
 
     if (token) {
       fetch("https://api.spotify.com/v1/me/player/play", {
