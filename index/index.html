@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Number Generator</title>
+  <style>
+    body {
+      text-align: center;
+      margin-top: 100px;
+      font-family: 'Arial', sans-serif;
+    }
+    #number {
+      font-size: 100px;
+      font-weight: bold;
+      font-family: 'Georgia', serif;
+      color: darkblue;
+    }
+    #phrase {
+      font-size: 60px;
+      font-family: 'Wingdings', 'Webdings';
+      margin-top: 40px;
+      color: darkgreen;
+    }
+  </style>
+</head>
+<body>
+  <div id="number">0</div>
+  <div id="phrase">🙂</div>
+
+  <script>
+    // Generate random number
+    const randomNumber = Math.floor(Math.random() * 1000);
+    document.getElementById('number').textContent = randomNumber;
+
+    // Random Wingdings-like phrases (just for fun)
+    const phrases = ['abc', 'xyz', '123', 'hello', 'wow'];
+    const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+    document.getElementById('phrase').textContent = randomPhrase;
+  </script>
+</body>
+</html>
