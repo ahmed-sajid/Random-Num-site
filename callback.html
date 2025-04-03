@@ -1,41 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Callback</title>
+  <meta charset="UTF-8">
+  <title>NeoCity Callback</title>
 </head>
 <body>
+  <h2 id="status">Waiting for playback...</h2>
+
   <script>
-    const hash = window.location.hash.substring(1).split("&").reduce((acc, cur) => {
-      const [key, val] = cur.split("=");
+    const hash = window.location.hash.substring(1).split("&").reduce((acc, part) => {
+      const [key, val] = part.split("=");
       acc[key] = decodeURIComponent(val);
       return acc;
     }, {});
+    const token = hash.access_token;
 
-    const accessToken = hash.access_token;
+    const trackUri = "spotify:track:4xkOaSrkexMciUUogZKVTS"; // Tatsuro Yamashita - Sparkle (example)
 
-    if (accessToken) {
-      console.log("Access token:", accessToken);
-
-      // Play a hardcoded track (City Pop vibe)
+    if (token) {
       fetch("https://api.spotify.com/v1/me/player/play", {
         method: "PUT",
         headers: {
-          "Authorization": "Bearer " + accessToken,
+          "Authorization": "Bearer " + token,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          uris: ["spotify:track:4xkOaSrkexMciUUogZKVTS"] // Tatsuro Yamashita - Sparkle
-        })
+        body: JSON.stringify({ uris: [trackUri] })
       }).then(res => {
-        if (res.ok) {
-          document.body.innerHTML = "<h2>🎶 Playing City Pop... 🎶</h2>";
-        } else {
-          document.body.innerHTML = "<h2>Playback failed 😢</h2>";
-        }
+        document.getElementById("status").textContent = res.ok
+          ? "🎶 Now Playing City Pop"
+          : "❌ Could not start playback (are you on Spotify Premium + have the app running?)";
       });
     } else {
-      document.body.innerHTML = "<h2>No access token found 😕</h2>";
+      document.getElementById("status").textContent = "No token found.";
     }
   </script>
 </body>
